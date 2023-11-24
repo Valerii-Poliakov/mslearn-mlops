@@ -1,12 +1,5 @@
-name: basic-env-ml
-channels:
-  - conda-forge
-dependencies:
-  - python=3.10
-  - pip
-  - pip:
-    - numpy
-    - pandas
-    - scikit-learn
-    - matplotlib
-    - azureml-mlflow
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: basic-env-scikit
+version: 1
+image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04
+conda_file: file:conda-envs/basic-env-ml.yml
