@@ -6,9 +6,9 @@ command: >-
 inputs:
   training_data: 
     type: uri_file 
-    path: azureml:/UI/2023-11-22_191709_UTC/data/diabetes-dev.csv
+    path: azureml://subscriptions/62b5ceb6-0cae-492c-8685-154e7c334033/resourcegroups/rg-ml-lab/workspaces/ml-lab/datastores/workspaceblobstore/paths/UI/2023-11-22_191709_UTC/data/diabetes-dev.csv
   reg_rate: 0.01
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+environment: azureml://registries/azureml/environments/sklearn-1.0/versions/18
 compute: azureml:compute-mllab
 experiment_name: diabetes-data-example
 description: Train a classification model on diabetes data using a registered dataset as input.
