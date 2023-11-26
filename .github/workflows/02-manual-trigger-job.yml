@@ -16,6 +16,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS_MLOPS}}
     - name: Run ML job
-      run: az ml job create --file src/job.yml
+      run: az ml job create --file src/job.yml -g RG-WSCS -w aml-valerii
 
 
