@@ -1,7 +1,8 @@
 name: Code checks
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   job1:
@@ -10,15 +11,27 @@ jobs:
     steps:
     - name: Check out repo
       uses: actions/checkout@main
-    - name: Use Python version 3.8
+    - name: Use Python version 3.9
       uses: actions/setup-python@v3
       with:
-        python-version: '3.8'
+        python-version: '3.9'
+    - name: Update setuptools
+      run: |
+        python -m pip install setuptools
+    - name: Install mlflow
+      run: |
+        python -m pip install mlflow
     - name: Install Flake8
       run: |
         python -m pip install flake8
     - name: Run linting tests
       run: | 
         flake8 src/model/
+    - name: Install Pytest
+      run: |
+        python -m pip install pytest
+    - name: Run unit tests
+      run: |
+        pytest tests/test_train.py
 
 
