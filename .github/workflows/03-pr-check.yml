@@ -1,0 +1,13 @@
+name: Pull request checks
+
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  job1:
+    name: Challenge3
+    runs-on: ubuntu-latest
+    steps:
+    - name: Placeholder
+      run: |
+        echo "Will add code checks here in next challenge"
