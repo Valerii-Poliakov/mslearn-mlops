@@ -1,14 +1,14 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
-code: src
+code: .
 command: >-
-  python Users/valerii.poliakov.wwsi/src/model/train.py
+  python model/train.py
   --training_data ${{inputs.training_data}}
 inputs:
   training_data: 
     type: uri_file 
-    path: azureml://subscriptions/62b5ceb6-0cae-492c-8685-154e7c334033/resourcegroups/rg-ml-lab/workspaces/ml-lab/datastores/workspaceblobstore/paths/UI/2023-11-22_191709_UTC/data/diabetes-dev.csv
+    path: azureml://subscriptions/54679983-8230-4d43-9046-7e6cf4f06706/resourcegroups/RG-WSCS/workspaces/aml-valerii/datastores/workspaceblobstore/paths/LocalUpload/a5b05a17f213e8e12e54948a8e3d1dfa/data/diabetes-dev.csv
   reg_rate: 0.01
-environment: azureml://registries/azureml/environments/sklearn-1.0/versions/18
-compute: azureml:compute-mllab
+environment: azureml:basic-env-scikit:1
+compute: azureml:testdev-vm
 experiment_name: diabetes-data-example
 description: Train a classification model on diabetes data using a registered dataset as input.
