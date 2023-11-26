@@ -14,6 +14,8 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+        creds: ${{secrets.AZURE_CREDENTIALS_MLOPS}}
+    - name: Run ML job
+      run: az ml job create --file src/job.yml
 
 
