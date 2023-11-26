@@ -2,12 +2,12 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: .
 command: >-
   python model/train.py
-  --training_data ${{inputs.training_data}}
+  --training_data ${{inputs.dataset}}
 inputs:
-  training_data: 
-    type: uri_file 
-    path: azureml://subscriptions/54679983-8230-4d43-9046-7e6cf4f06706/resourcegroups/RG-WSCS/workspaces/aml-valerii/datastores/workspaceblobstore/paths/LocalUpload/a5b05a17f213e8e12e54948a8e3d1dfa/data/diabetes-dev.csv
-  reg_rate: 0.01
+  dataset: 
+    type: uri_folder
+    path: azureml:diabetes-dev-folder@latest
+    mode: ro_mount
 environment: azureml:basic-env-scikit:1
 compute: azureml:testdev-vm
 experiment_name: diabetes-data-example
