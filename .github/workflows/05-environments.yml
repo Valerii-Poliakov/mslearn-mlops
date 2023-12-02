@@ -1,0 +1,42 @@
+name: Train model
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  dev-job:
+    runs-on: ubuntu-latest
+    environment:
+        name: dev 
+    steps:
+    - name: check out repo
+      uses: actions/checkout@v2
+    - name: install az ml extension
+      run: az extension add -n ml -y
+    - name: azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_MLOPS}}
+    - name: set current directory
+      run: cd src
+    - name: run pipeline
+      run: az ml job create --file src/job-cluster.yml -g RG-WSCS -w ml-valerii
+  
+  prod-job:
+    runs-on: ubuntu-latest
+    environment:
+        name: prod 
+    steps:
+    - name: check out repo
+      uses: actions/checkout@v2
+    - name: install az ml extension
+      run: az extension add -n ml -y
+    - name: azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
+    - name: set current directory
+      run: cd src
+    - name: run pipeline
+      run: az ml job create --file src/job-cluster-prod.yml -g RG-WSCS -w ml-valerii  

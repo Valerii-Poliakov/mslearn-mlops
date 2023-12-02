@@ -1,0 +1,14 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: .
+command: >-
+  python model/train.py
+  --training_data ${{inputs.dataset}}
+inputs:
+  dataset: 
+    type: uri_folder
+    path: azureml:diabetes-prod-folder@latest
+    mode: ro_mount
+environment: azureml:basic-env-scikit:1
+compute: azureml:testdev-cluster
+experiment_name: diabetes-data-example
+description: Train a classification model on diabetes data using a registered dataset as input.
