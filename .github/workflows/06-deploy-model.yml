@@ -1,0 +1,19 @@
+name: Deploy model and create endpoint
+
+on:
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
+    - name: Deploy latest model version
+      run: az ml online-deployment create -f src/model-deployment.yml -g RG-WSCS -w aml-valerii --query name -o tsv
