@@ -16,4 +16,5 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
     - name: Deploy latest model version
-      run: az ml online-deployment create -f src/model-deployment.yml -g RG-WSCS -w aml-valerii --query name -o tsv
+#      run: az ml online-deployment create -f src/model-deployment.yml -g RG-WSCS -w aml-valerii
+      run: az ml online-deployment update -f src/model-deployment.yml -g RG-WSCS -w aml-valerii
