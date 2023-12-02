@@ -40,4 +40,7 @@ jobs:
     - name: set current directory
       run: cd src
     - name: run pipeline
-      run: az ml job create --file src/job-cluster-prod.yml -g RG-WSCS -w aml-valerii  
+      id: prod-run
+      run: run_id=$(az ml job create --file src/job-cluster-prod.yml -g RG-WSCS -w aml-valerii --query name -o tsv) >> $GITHUB_OUTPUT
+    - name: register model
+      run: az ml model create -n diabetes-data-example -v 1 -p runs:/${{steps.prod-run.outputs.run_id}}/model --type mlflow_model
